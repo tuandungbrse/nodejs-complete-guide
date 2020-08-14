@@ -3,6 +3,7 @@ var fs = require('fs');
 exports.handler = function requestHandler(req, res) {
   const url = req.url;
   const method = req.method;
+
   if (url === '/') {
     res.write('<html>');
     res.write('<head><title>Enter Messsage</title></head>');
