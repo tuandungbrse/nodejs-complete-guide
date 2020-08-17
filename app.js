@@ -7,14 +7,16 @@ var bodyParser = require('body-parser');
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
+  res.status(404).render('404', { pageTitle: 'Page Not Found!' });
 });
 
 var server = http.createServer(app);
