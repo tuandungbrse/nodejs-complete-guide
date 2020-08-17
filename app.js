@@ -6,8 +6,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
+var handlebars = require('express-handlebars');
 
-app.set('view engine', 'pug');
+app.engine('hbs', handlebars({ extname: 'hbs' }));
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
