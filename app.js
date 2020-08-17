@@ -6,10 +6,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
-var handlebars = require('express-handlebars');
 
-app.engine('hbs', handlebars({ extname: 'hbs' }));
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,7 +16,9 @@ app.use('/admin', adminRoutes.router);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).render('404', { pageTitle: 'Page Not Found!' });
+  res
+    .status(404)
+    .render('404', { pageTitle: 'Page Not Found!', path: '/error' });
 });
 
 var server = http.createServer(app);
