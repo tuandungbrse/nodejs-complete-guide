@@ -6,11 +6,6 @@ var bodyParser = require('body-parser');
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
 var errorsController = require('./controllers/errors');
-var db = require('./utils/database');
-
-db.execute('SELECT * FROM products')
-  .then((data) => console.log(data))
-  .catch((err) => console.log);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
