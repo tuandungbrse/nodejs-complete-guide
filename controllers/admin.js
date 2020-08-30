@@ -13,7 +13,13 @@ exports.postAddProduct = (req, res, next) => {
   const photo = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  Product.create({ title, price, description, photo, createdBy: req.user.id })
+  Product.create({
+    title,
+    price,
+    description,
+    photo,
+    createdBy: req.user.id
+  })
     .then((data) => {
       console.log(data);
       res.redirect('/admin/products');
@@ -70,7 +76,7 @@ exports.getProducts = (req, res, next) => {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products',
-        isAuthenticateed: req.isLoggedIn
+        isAuthenticateed: req.session.isLoggedIn
       });
     })
     .catch((err) => console.log(err));
