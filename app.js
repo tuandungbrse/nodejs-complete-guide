@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
 var errorsController = require('./controllers/error');
+var authRoutes = require('./routes/auth');
 
 var User = require('./models/user');
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 app.use(errorsController.get404);
 
 module.exports = app;
