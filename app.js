@@ -3,6 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
+var csrf = require('csurf');
+var csrfProtection = csrf();
 
 var adminRoutes = require('./routes/admin');
 var shopRoutes = require('./routes/shop');
@@ -30,6 +32,7 @@ app.use(
     store: store
   })
 );
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
   if (!req.session.user) {

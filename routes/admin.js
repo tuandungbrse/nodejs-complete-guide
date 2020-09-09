@@ -5,20 +5,21 @@ const express = require('express');
 const adminController = require('../controllers/admin');
 
 const router = express.Router();
+const protect = require('../middlewares/auth');
 
 // /admin/add-product => GET
-router.get('/add-product', adminController.getAddProduct);
+router.get('/add-product', protect, adminController.getAddProduct);
 
 // /admin/products => GET
-router.get('/products', adminController.getProducts);
+router.get('/products', protect, adminController.getProducts);
 
 // /admin/add-product => POST
-router.post('/add-product', adminController.postAddProduct);
+router.post('/add-product', protect, adminController.postAddProduct);
 
-router.get('/edit-product/:productId', adminController.getEditProduct);
+router.get('/edit-product/:productId', protect, adminController.getEditProduct);
 
-router.post('/edit-product', adminController.postEditProduct);
+router.post('/edit-product', protect, adminController.postEditProduct);
 
-router.post('/delete-product', adminController.postDeleteProduct);
+router.post('/delete-product', protect, adminController.postDeleteProduct);
 
 module.exports = router;
